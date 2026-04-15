@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Meu Perfil — CodeLab Explorer">
+  <title>Perfil — CodeLab Explorer</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+</head>
+<body>
+
+<div id="toast-container" class="toast-container"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="nav-logo">
+      <svg class="logo-icon" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="url(#lgpr)"/><path d="M12 14L18 20L12 26" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="20" y1="26" x2="28" y2="26" stroke="white" stroke-width="2.5" stroke-linecap="round"/><defs><linearGradient id="lgpr" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#7c3aed"/><stop offset="1" stop-color="#2563eb"/></linearGradient></defs></svg>
+      <span>CodeLab <strong>Explorer</strong></span>
+    </a>
+    <div style="flex:1;"></div>
+    <ul class="nav-links">
+      <li><a href="../index.html" class="nav-link" data-page="index.html">Início</a></li>
+      <li><a href="projects.html" class="nav-link" data-page="projects.html">Projetos</a></li>
+      <li><a href="dashboard.html" class="nav-link" data-page="dashboard.html">Painel</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <div class="user-menu" id="user-menu" style="display:none">
+        <button class="user-avatar-btn" id="user-menu-btn">
+          <div class="avatar-circle-sm" id="user-initials-nav">--</div>
+          <span id="user-name-nav"></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;opacity:.6"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="user-dropdown" id="user-dropdown">
+          <div class="user-dropdown-header"><p id="dropdown-name">--</p><span id="dropdown-email">--</span></div>
+          <a href="dashboard.html" class="user-dropdown-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Painel</a>
+          <div class="user-dropdown-divider"></div>
+          <div class="user-dropdown-item danger" id="nav-logout-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sair</div>
+        </div>
+      </div>
+      <a href="login.html" class="btn btn-primary btn-sm" id="nav-login-btn">Entrar</a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <ul class="mobile-nav-links">
+    <li><a href="../index.html" class="mobile-link">Início</a></li>
+    <li><a href="projects.html" class="mobile-link">Projetos</a></li>
+    <li><a href="dashboard.html" class="mobile-link">Painel</a></li>
+  </ul>
+</div>
+
+<!-- PROFILE HERO -->
+<main class="profile-page">
+  <div class="profile-hero">
+    <div class="profile-hero-inner">
+      <div class="profile-avatar-lg" id="profile-avatar" title="Clique para alterar foto">
+        <span id="profile-initials">--</span>
+        <div class="avatar-upload-overlay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </div>
+        <input type="file" id="avatar-upload" accept="image/*" style="display:none;">
+      </div>
+      <div class="profile-hero-info">
+        <h1 id="profile-name">Carregando...</h1>
+        <p id="profile-meta">@usuario · Membro desde --</p>
+        <div class="profile-hero-stats">
+          <div>
+            <span class="ph-stat-num" id="stat-projects">24</span>
+            <span class="ph-stat-label">Projetos</span>
+          </div>
+          <div>
+            <span class="ph-stat-num" id="stat-saved">12</span>
+            <span class="ph-stat-label">Salvos</span>
+          </div>
+          <div>
+            <span class="ph-stat-num" id="stat-streak">15</span>
+            <span class="ph-stat-label">Dias Seguidos</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:10px;">
+        <button class="btn" style="background:rgba(255,255,255,.15);color:white;border:1px solid rgba(255,255,255,.3);" id="edit-profile-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Editar Perfil
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile content -->
+  <div class="profile-content">
+    <div class="profile-grid">
+
+      <!-- Conquistas -->
+      <div class="profile-card">
+        <h3>🏆 Conquistas</h3>
+        <div class="badges-grid">
+          <div class="achievement-badge earned" title="Complete 5 projetos iniciantes">
+            <div class="ab-icon">🌟</div>
+            <span>Início Rápido</span>
+          </div>
+          <div class="achievement-badge earned" title="Complete 10 projetos">
+            <div class="ab-icon">⚡</div>
+            <span>Explorador</span>
+          </div>
+          <div class="achievement-badge earned" title="Sequência de 7 dias">
+            <div class="ab-icon">🔥</div>
+            <span>Em Chamas</span>
+          </div>
+          <div class="achievement-badge earned" title="Projetos em 3 linguagens">
+            <div class="ab-icon">🌍</div>
+            <span>Poliglota</span>
+          </div>
+          <div class="achievement-badge" title="Complete 50 projetos">
+            <div class="ab-icon">🏆</div>
+            <span>Mestre</span>
+          </div>
+          <div class="achievement-badge" title="Sequência de 30 dias">
+            <div class="ab-icon">💎</div>
+            <span>Imparável</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Editar Perfil -->
+      <div class="profile-card" id="edit-form-card" style="display:none;">
+        <h3>✏️ Editar Perfil</h3>
+        <form id="profile-form">
+          <div class="form-group">
+            <label class="form-label">Nome completo</label>
+            <input class="form-input" type="text" id="edit-name" placeholder="Seu nome">
+          </div>
+          <div class="form-group">
+            <label class="form-label">E-mail</label>
+            <input class="form-input" type="email" id="edit-email" placeholder="seu@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Bio</label>
+            <textarea class="form-textarea" id="edit-bio" placeholder="Fale um pouco sobre você..." rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nova Senha (opcional)</label>
+            <input class="form-input" type="password" id="edit-pw" placeholder="Deixe em branco para manter">
+          </div>
+          <div style="display:flex;gap:10px;margin-top:8px;">
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            <button type="button" class="btn btn-ghost" id="cancel-edit-btn">Cancelar</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Projetos salvos (em destaque aqui no perfil) -->
+      <div class="profile-card" style="grid-column:1/-1;">
+        <h3>🔖 Projetos Salvos</h3>
+        <div class="saved-grid-dash" id="profile-saved-grid">Carregando...</div>
+      </div>
+
+      <!-- Upload de avatar (info) -->
+      <div class="profile-card" style="background:rgba(124,58,237,.06); border-color:rgba(124,58,237,.2);">
+        <h3>📸 Foto de Perfil</h3>
+        <p style="font-size:.88rem; color:var(--text-secondary); margin-bottom:16px; line-height:1.6;">Clique na sua foto no topo para fazer upload de uma nova imagem. Formatos aceitos: JPG, PNG, GIF. Tamanho máximo: 5MB.</p>
+        <label for="avatar-upload-card" class="btn btn-secondary btn-block" style="cursor:pointer;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Enviar Foto
+        </label>
+        <input type="file" id="avatar-upload-card" accept="image/*" style="display:none;">
+      </div>
+
+      <!-- Info adicional -->
+      <div class="profile-card">
+        <h3>📊 Estatísticas</h3>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-light);">
+            <span style="font-size:.88rem; color:var(--text-secondary);">Nível Atual</span>
+            <span class="badge badge-primary">Intermediário</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-light);">
+            <span style="font-size:.88rem; color:var(--text-secondary);">Membro desde</span>
+            <span id="member-since" style="font-size:.88rem; font-weight:600;">--</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-light);">
+            <span style="font-size:.88rem; color:var(--text-secondary);">Linguagem Favorita</span>
+            <span style="font-size:.88rem; font-weight:600;">Python 🐍</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0;">
+            <span style="font-size:.88rem; color:var(--text-secondary);">Projetos Curtidos</span>
+            <span style="font-size:.88rem; font-weight:600;">31</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<script src="../js/api.js"></script>
+<script src="../js/core.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const user = API.getMe() || { name: 'Visitante Demo', initials: 'VD', email: 'demo@codelab.edu', joined: '2025-01-01' };
+
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set('profile-initials', user.initials || 'VD');
+  set('profile-name', user.name);
+  set('profile-meta', `@${user.name.split(' ')[0].toLowerCase()} · Membro desde ${new Date(user.joined || Date.now()).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })}`);
+  set('member-since', new Date(user.joined || Date.now()).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' }));
+  set('dropdown-name', user.name);
+  set('dropdown-email', user.email);
+
+  // Saved projects
+  const savedIds = API.getSavedProjects();
+  set('stat-saved', savedIds.length);
+  const savedGrid = document.getElementById('profile-saved-grid');
+  if (savedGrid) {
+    if (!savedIds.length) {
+      savedGrid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--text-muted);font-size:.88rem;">Nenhum projeto salvo ainda. <a href="projects.html" style="color:var(--primary);">Ver projetos</a></div>`;
+    } else {
+      const allRes = await API.getProjects({ limit: 100 });
+      if (allRes.ok) {
+        const saved = allRes.data.projects.filter(p => savedIds.includes(p.id));
+        savedGrid.innerHTML = saved.map(p => `
+          <a href="project-detail.html?id=${p.id}" class="saved-item-dash">
+            <h5>${p.icon} ${escHtml(p.title)}</h5>
+            <p>${p.difficulty === 'beginner' ? 'Iniciante' : p.difficulty === 'intermediate' ? 'Intermediário' : 'Avançado'} · ${p.language}</p>
+          </a>
+        `).join('');
+      }
+    }
+  }
+
+  // Edit profile toggle
+  const editBtn = document.getElementById('edit-profile-btn');
+  const editCard = document.getElementById('edit-form-card');
+  const cancelBtn = document.getElementById('cancel-edit-btn');
+  editBtn?.addEventListener('click', () => {
+    editCard.style.display = editCard.style.display === 'none' ? 'block' : 'none';
+    document.getElementById('edit-name').value = user.name;
+    document.getElementById('edit-email').value = user.email;
+  });
+  cancelBtn?.addEventListener('click', () => editCard.style.display = 'none');
+
+  document.getElementById('profile-form')?.addEventListener('submit', e => {
+    e.preventDefault();
+    showToast('Perfil atualizado! (Requer backend na Parte 2) ✅', 'success');
+    editCard.style.display = 'none';
+  });
+
+  // Avatar upload
+  function handleAvatarUpload(input) {
+    input.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      showToast('Enviando imagem...', 'info');
+      const res = await API.uploadImage(file);
+      if (!res.ok) { showToast(res.error, 'error'); return; }
+      // Preview
+      const avatarEl = document.getElementById('profile-avatar');
+      const existingImg = avatarEl.querySelector('img');
+      if (existingImg) existingImg.src = res.data.url;
+      else {
+        const img = document.createElement('img');
+        img.src = res.data.url;
+        img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;';
+        avatarEl.appendChild(img);
+      }
+      showToast('Foto atualizada! (Requer backend para persistir) ✅', 'success');
+    });
+  }
+  handleAvatarUpload(document.getElementById('avatar-upload'));
+  handleAvatarUpload(document.getElementById('avatar-upload-card'));
+  document.getElementById('profile-avatar')?.addEventListener('click', () => document.getElementById('avatar-upload').click());
+});
+</script>
+</body>
+</html>

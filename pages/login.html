@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Entrar ou criar conta no CodeLab Explorer — Plataforma de projetos para estudantes de programação.">
+  <title>Entrar — CodeLab Explorer</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+</head>
+<body>
+
+<div id="toast-container" class="toast-container"></div>
+
+<!-- Minimal navbar -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="nav-logo">
+      <svg class="logo-icon" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="url(#lgl)"/><path d="M12 14L18 20L12 26" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="20" y1="26" x2="28" y2="26" stroke="white" stroke-width="2.5" stroke-linecap="round"/><defs><linearGradient id="lgl" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#7c3aed"/><stop offset="1" stop-color="#2563eb"/></linearGradient></defs></svg>
+      <span>CodeLab <strong>Explorer</strong></span>
+    </a>
+    <div style="flex:1;"></div>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <a href="projects.html" class="btn btn-ghost btn-sm">Explorar Projetos</a>
+  </div>
+</nav>
+
+<!-- AUTH LAYOUT -->
+<main class="auth-page">
+  <div class="auth-layout">
+
+    <!-- Visual panel -->
+    <div class="auth-visual">
+      <div class="auth-visual-content">
+        <div class="auth-logo">
+          <svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="rgba(255,255,255,.2)"/><path d="M12 14L18 20L12 26" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="20" y1="26" x2="28" y2="26" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
+          CodeLab Explorer
+        </div>
+        <h2>Aprenda programação com projetos reais</h2>
+        <p>Junte-se a milhares de estudantes que desenvolvem habilidades práticas através de projetos curados por professores.</p>
+        <div class="auth-features">
+          <div class="auth-feature">
+            <div class="auth-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <span>+150 projetos em várias linguagens</span>
+          </div>
+          <div class="auth-feature">
+            <div class="auth-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <span>Trilha de aprendizado personalizada</span>
+          </div>
+          <div class="auth-feature">
+            <div class="auth-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <span>Projetos sugeridos por professores</span>
+          </div>
+          <div class="auth-feature">
+            <div class="auth-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            </div>
+            <span>Conquistas e certificados de progresso</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form panel -->
+    <div class="auth-form-wrap">
+      <div class="auth-tabs">
+        <button class="auth-tab-btn active" data-tab="login">Entrar</button>
+        <button class="auth-tab-btn" data-tab="register">Criar Conta</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div class="auth-tab-pane active" id="tab-login">
+        <h2 class="auth-form-title">Bem-vindo de volta!</h2>
+        <p class="auth-form-subtitle">Continue sua jornada de aprendizado.</p>
+        <form id="login-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="login-email">E-mail</label>
+            <input class="form-input" type="email" id="login-email" placeholder="seu@email.com" autocomplete="email">
+            <span class="form-error" id="login-email-err"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="login-password">Senha</label>
+            <div style="position:relative;">
+              <input class="form-input" type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" style="padding-right:48px;">
+              <button type="button" id="toggle-login-pw" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);">
+                <svg id="eye-login" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <span class="form-error" id="login-pw-err"></span>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin:-12px 0 16px;">
+            <a href="#" style="font-size:.82rem;color:var(--primary);">Esqueci a senha</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" id="login-submit">
+            <span id="login-label">Entrar</span>
+            <span id="login-spinner" style="display:none;">Entrando...</span>
+          </button>
+        </form>
+        <div class="auth-divider">ou entre com</div>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-secondary btn-block" onclick="showToast('Disponível em breve!','info')">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            Google
+          </button>
+          <button class="btn btn-secondary btn-block" onclick="showToast('Disponível em breve!','info')">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </button>
+        </div>
+        <p class="auth-footer-text">Não tem conta? <a href="#" id="goto-register">Criar conta gratuita</a></p>
+
+        <!-- DICA PARA DEMO -->
+        <div style="margin-top:20px; padding:14px 16px; background:rgba(124,58,237,.08); border:1px solid rgba(124,58,237,.2); border-radius:var(--radius-sm); font-size:.8rem; color:var(--text-secondary);">
+          <strong style="color:var(--primary);">Demo:</strong> Use <code>admin@codelab.edu</code> (admin) ou <code>ana@email.com</code> (estudante) com qualquer senha (4+ caracteres).
+        </div>
+      </div>
+
+      <!-- REGISTER -->
+      <div class="auth-tab-pane" id="tab-register">
+        <h2 class="auth-form-title">Crie sua conta</h2>
+        <p class="auth-form-subtitle">Comece gratuitamente, sem cartão de crédito.</p>
+        <form id="register-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="reg-name">Nome completo</label>
+            <input class="form-input" type="text" id="reg-name" placeholder="Ana Beatriz" autocomplete="name">
+            <span class="form-error" id="reg-name-err"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="reg-email">E-mail</label>
+            <input class="form-input" type="email" id="reg-email" placeholder="seu@email.com" autocomplete="email">
+            <span class="form-error" id="reg-email-err"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="reg-password">Senha</label>
+            <div style="position:relative;">
+              <input class="form-input" type="password" id="reg-password" placeholder="Mínimo 8 caracteres" style="padding-right:48px;">
+              <button type="button" id="toggle-reg-pw" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <div id="pw-strength-bar" style="margin-top:6px; height:4px; border-radius:2px; background:var(--bg-tertiary); overflow:hidden; display:none;">
+              <div id="pw-strength-fill" style="height:100%; border-radius:2px; transition: width .3s, background .3s;"></div>
+            </div>
+            <span class="form-error" id="reg-pw-err"></span>
+          </div>
+          <div class="form-group">
+            <label class="check-option" style="border:none; padding:0;">
+              <input type="checkbox" id="reg-terms" required>
+              <span style="font-size:.84rem;">Concordo com os <a href="#" style="color:var(--primary);">Termos de Uso</a> e <a href="#" style="color:var(--primary);">Política de Privacidade</a></span>
+            </label>
+            <span class="form-error" id="reg-terms-err"></span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" id="register-submit">
+            <span id="reg-label">Criar Conta</span>
+            <span id="reg-spinner" style="display:none;">Criando...</span>
+          </button>
+        </form>
+        <p class="auth-footer-text">Já tem conta? <a href="#" id="goto-login">Entrar</a></p>
+      </div>
+    </div><!-- /auth-form-wrap -->
+  </div><!-- /auth-layout -->
+</main>
+
+<script src="../js/api.js"></script>
+<script src="../js/core.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Redireciona se já logado
+  if (API.isLoggedIn()) {
+    window.location.href = 'dashboard.html'; return;
+  }
+
+  // Tabs
+  const tabs   = document.querySelectorAll('.auth-tab-btn');
+  const panes  = document.querySelectorAll('.auth-tab-pane');
+  function switchTab(name) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+    panes.forEach(p => p.classList.toggle('active', p.id === `tab-${name}`));
+  }
+  tabs.forEach(t => t.addEventListener('click', () => switchTab(t.dataset.tab)));
+  document.getElementById('goto-register').addEventListener('click', e => { e.preventDefault(); switchTab('register'); });
+  document.getElementById('goto-login').addEventListener('click', e => { e.preventDefault(); switchTab('login'); });
+
+  // Show/hide password
+  function togglePw(inputId, btnId) {
+    const input = document.getElementById(inputId);
+    const btn = document.getElementById(btnId);
+    if (!input || !btn) return;
+    btn.addEventListener('click', () => {
+      input.type = input.type === 'password' ? 'text' : 'password';
+    });
+  }
+  togglePw('login-password', 'toggle-login-pw');
+  togglePw('reg-password', 'toggle-reg-pw');
+
+  // Password strength
+  const regPw = document.getElementById('reg-password');
+  const bar = document.getElementById('pw-strength-bar');
+  const fill = document.getElementById('pw-strength-fill');
+  if (regPw) {
+    regPw.addEventListener('input', () => {
+      const v = regPw.value;
+      bar.style.display = v ? 'block' : 'none';
+      let score = 0;
+      if (v.length >= 8) score++;
+      if (/[A-Z]/.test(v)) score++;
+      if (/[0-9]/.test(v)) score++;
+      if (/[^A-Za-z0-9]/.test(v)) score++;
+      const map = [['25%','#ef4444'],['50%','#f59e0b'],['75%','#06b6d4'],['100%','#10b981']];
+      const [w, c] = map[Math.max(0, score-1)] || map[0];
+      fill.style.width = w; fill.style.background = c;
+    });
+  }
+
+  // LOGIN
+  document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    document.getElementById('login-label').style.display = 'none';
+    document.getElementById('login-spinner').style.display = 'inline';
+    const res = await API.login({ email, password });
+    document.getElementById('login-label').style.display = 'inline';
+    document.getElementById('login-spinner').style.display = 'none';
+    if (!res.ok) { showToast(res.error, 'error'); return; }
+    showToast(`Bem-vindo, ${res.data.user.name.split(' ')[0]}! 🎉`, 'success');
+    setTimeout(() => {
+      window.location.href = res.data.user.role === 'admin' ? 'admin.html' : 'dashboard.html';
+    }, 800);
+  });
+
+  // REGISTER
+  document.getElementById('register-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('reg-name').value.trim();
+    const email = document.getElementById('reg-email').value.trim();
+    const password = document.getElementById('reg-password').value;
+    const terms = document.getElementById('reg-terms').checked;
+    if (!name) { showToast('Informe seu nome.', 'error'); return; }
+    if (password.length < 4) { showToast('Senha muito curta.', 'error'); return; }
+    if (!terms) { showToast('Aceite os termos de uso.', 'error'); return; }
+    document.getElementById('reg-label').style.display = 'none';
+    document.getElementById('reg-spinner').style.display = 'inline';
+    const res = await API.register({ name, email, password });
+    document.getElementById('reg-label').style.display = 'inline';
+    document.getElementById('reg-spinner').style.display = 'none';
+    if (!res.ok) { showToast(res.error, 'error'); return; }
+    showToast(`Conta criada! Bem-vindo, ${res.data.user.name.split(' ')[0]}! 🎉`, 'success');
+    setTimeout(() => window.location.href = 'dashboard.html', 900);
+  });
+});
+</script>
+</body>
+</html>

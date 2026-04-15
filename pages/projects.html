@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore todos os projetos do CodeLab Explorer. Filtre por linguagem, dificuldade e categoria.">
+  <title>Projetos — CodeLab Explorer</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+</head>
+<body>
+
+<div id="toast-container" class="toast-container"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="nav-logo">
+      <svg class="logo-icon" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="url(#lgp)"/><path d="M12 14L18 20L12 26" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="20" y1="26" x2="28" y2="26" stroke="white" stroke-width="2.5" stroke-linecap="round"/><defs><linearGradient id="lgp" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#7c3aed"/><stop offset="1" stop-color="#2563eb"/></linearGradient></defs></svg>
+      <span>CodeLab <strong>Explorer</strong></span>
+    </a>
+    <div class="nav-search">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" id="search-input" placeholder="Buscar projetos..." autocomplete="off">
+      <kbd class="search-kbd">⌘K</kbd>
+      <div class="search-dropdown" id="search-dropdown"></div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html" class="nav-link" data-page="index.html">Início</a></li>
+      <li><a href="projects.html" class="nav-link active" data-page="projects.html">Projetos</a></li>
+      <li><a href="dashboard.html" class="nav-link" data-page="dashboard.html">Painel</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <div class="user-menu" id="user-menu" style="display:none">
+        <button class="user-avatar-btn" id="user-menu-btn">
+          <div class="avatar-circle-sm" id="user-initials-nav">--</div>
+          <span id="user-name-nav"></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;opacity:.6"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="user-dropdown" id="user-dropdown">
+          <div class="user-dropdown-header"><p id="dropdown-name">--</p><span id="dropdown-email">--</span></div>
+          <a href="dashboard.html" class="user-dropdown-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Painel</a>
+          <a href="profile.html" class="user-dropdown-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Perfil</a>
+          <a href="admin.html" class="user-dropdown-item" id="admin-link" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Admin</a>
+          <div class="user-dropdown-divider"></div>
+          <div class="user-dropdown-item danger" id="nav-logout-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sair</div>
+        </div>
+      </div>
+      <a href="login.html" class="btn btn-primary btn-sm" id="nav-login-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Entrar
+      </a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <ul class="mobile-nav-links">
+    <li><a href="../index.html" class="mobile-link">Início</a></li>
+    <li><a href="projects.html" class="mobile-link">Projetos</a></li>
+    <li><a href="dashboard.html" class="mobile-link">Painel</a></li>
+  </ul>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <h1>Biblioteca de <span class="gradient-text">Projetos</span></h1>
+    <p>150+ projetos curados por professores em várias linguagens, níveis e categorias.</p>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="section" style="padding-top:48px;">
+  <div class="container">
+    <div class="projects-layout-full">
+
+      <!-- Sidebar de filtros -->
+      <aside class="filter-sidebar" id="filter-sidebar">
+        <div class="filter-sidebar-header">
+          <h3>Filtros</h3>
+          <button class="filter-clear-btn" id="filter-clear-btn">Limpar</button>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group-title">Dificuldade</div>
+          <div class="filter-chips">
+            <button class="filter-chip active" data-filter="difficulty" data-value="beginner">🟢 Iniciante</button>
+            <button class="filter-chip active" data-filter="difficulty" data-value="intermediate">🟡 Intermediário</button>
+            <button class="filter-chip active" data-filter="difficulty" data-value="advanced">🔴 Avançado</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group-title">Linguagem</div>
+          <div class="filter-chips">
+            <button class="filter-chip active" data-filter="language" data-value="python">Python</button>
+            <button class="filter-chip active" data-filter="language" data-value="javascript">JavaScript</button>
+            <button class="filter-chip active" data-filter="language" data-value="java">Java</button>
+            <button class="filter-chip active" data-filter="language" data-value="cpp">C++</button>
+            <button class="filter-chip active" data-filter="language" data-value="typescript">TypeScript</button>
+            <button class="filter-chip active" data-filter="language" data-value="rust">Rust</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group-title">Categoria</div>
+          <div class="filter-chips">
+            <button class="filter-chip active" data-filter="category" data-value="web">🌐 Apps Web</button>
+            <button class="filter-chip active" data-filter="category" data-value="games">🎮 Jogos</button>
+            <button class="filter-chip active" data-filter="category" data-value="algorithms">⚡ Algoritmos</button>
+            <button class="filter-chip active" data-filter="category" data-value="data-structures">🏗️ Estrut. Dados</button>
+            <button class="filter-chip active" data-filter="category" data-value="ai-ml">🤖 IA & ML</button>
+            <button class="filter-chip active" data-filter="category" data-value="cli">💻 CLI</button>
+          </div>
+        </div>
+
+        <button class="btn btn-secondary btn-block" id="filter-close-mobile" style="display:none;margin-top:8px;">Aplicar Filtros</button>
+      </aside>
+
+      <!-- Grid principal -->
+      <div class="projects-main">
+        <div class="projects-toolbar">
+          <button class="filter-mobile-btn" id="filter-open-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            Filtros
+          </button>
+          <span class="projects-count" id="projects-count">Carregando...</span>
+          <div class="projects-sort">
+            <label for="sort-select" style="white-space:nowrap;">Ordenar por:</label>
+            <select id="sort-select" class="form-select" style="padding:6px 10px;width:auto;">
+              <option value="">Relevância</option>
+              <option value="popular">Mais curtidos</option>
+              <option value="newest">Mais recentes</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Skeleton -->
+        <div class="projects-grid" id="projects-grid">
+          ${Array.from({length:6},()=>`<div class="skeleton" style="height:280px;border-radius:var(--radius);"></div>`).join('')}
+        </div>
+
+        <!-- Paginação -->
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0;">
+      <p>© 2026 CodeLab Explorer. Todos os direitos reservados.</p>
+      <div class="footer-legal"><a href="#">Privacidade</a><a href="#">Termos</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/api.js"></script>
+<script src="../js/core.js"></script>
+<script src="../js/projects.js"></script>
+</body>
+</html>

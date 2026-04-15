@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Painel Administrativo — CodeLab Explorer">
+  <title>Admin — CodeLab Explorer</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/admin.css">
+</head>
+<body>
+
+<div id="toast-container" class="toast-container"></div>
+
+<!-- NAVBAR mini -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="nav-logo">
+      <svg class="logo-icon" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="url(#lga)"/><path d="M12 14L18 20L12 26" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="20" y1="26" x2="28" y2="26" stroke="white" stroke-width="2.5" stroke-linecap="round"/><defs><linearGradient id="lga" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#7c3aed"/><stop offset="1" stop-color="#2563eb"/></linearGradient></defs></svg>
+      <span>CodeLab <strong>Admin</strong></span>
+    </a>
+    <div style="flex:1;"></div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="user-avatar-btn" id="user-menu-btn">
+        <div class="avatar-circle-sm" id="user-initials-nav">--</div>
+        <span id="user-name-nav"></span>
+      </button>
+      <button class="btn btn-ghost btn-sm" id="nav-logout-btn">Sair</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ADMIN LAYOUT -->
+<div class="admin-page">
+  <div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <div class="admin-sidebar-brand">Painel Admin</div>
+      <div class="admin-nav-section">
+        <div class="admin-nav-section-title">Geral</div>
+        <div class="admin-nav-item active" data-panel="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </div>
+        <div class="admin-nav-item" data-panel="projects">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Projetos
+          <span class="admin-nav-badge" id="badge-projects">8</span>
+        </div>
+        <div class="admin-nav-item" data-panel="users">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Usuários
+          <span class="admin-nav-badge" id="badge-users">5</span>
+        </div>
+        <div class="admin-nav-item" data-panel="create">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          Novo Projeto
+        </div>
+      </div>
+      <div class="admin-nav-section">
+        <div class="admin-nav-section-title">Links</div>
+        <a href="../index.html" class="admin-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Ver Site
+        </a>
+        <a href="projects.html" class="admin-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          Catálogo Público
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="admin-main">
+
+      <!-- === DASHBOARD PANEL === -->
+      <div class="admin-panel active" id="panel-dashboard">
+        <div class="admin-topbar">
+          <div>
+            <h1>Dashboard</h1>
+            <p class="admin-topbar-desc">Bem-vindo ao painel de administração do CodeLab Explorer.</p>
+          </div>
+        </div>
+
+        <div class="admin-stats" id="admin-stats-grid">
+          <div class="stat-card">
+            <div class="stat-card-icon purple">📚</div>
+            <div class="stat-card-body">
+              <div class="stat-card-value" id="stat-total-projects">—</div>
+              <div class="stat-card-label">Total de Projetos</div>
+              <div class="stat-card-trend trend-up">+2 este mês</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon blue">👥</div>
+            <div class="stat-card-body">
+              <div class="stat-card-value" id="stat-total-users">—</div>
+              <div class="stat-card-label">Estudantes</div>
+              <div class="stat-card-trend trend-up">+18 esta semana</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon green">❤️</div>
+            <div class="stat-card-body">
+              <div class="stat-card-value">1.2k</div>
+              <div class="stat-card-label">Total de Curtidas</div>
+              <div class="stat-card-trend trend-up">+89 hoje</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon amber">🔖</div>
+            <div class="stat-card-body">
+              <div class="stat-card-value">847</div>
+              <div class="stat-card-label">Projetos Salvos</div>
+              <div class="stat-card-trend trend-up">+34 hoje</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick actions -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+          <div class="form-card">
+            <div class="form-card-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              Ações Rápidas
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <button class="btn btn-primary" onclick="switchPanel('create')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Adicionar Projeto
+              </button>
+              <button class="btn btn-secondary" onclick="switchPanel('projects')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                Gerenciar Projetos
+              </button>
+              <button class="btn btn-secondary" onclick="switchPanel('users')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                Ver Usuários
+              </button>
+            </div>
+          </div>
+          <div class="form-card">
+            <div class="form-card-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Integração Backend
+            </div>
+            <p style="font-size:.84rem;color:var(--text-secondary);margin-bottom:16px;line-height:1.7;">Esta versão usa dados mock. Na <strong>Parte 2</strong>, todas as operações CRUD serão integradas ao backend com autenticação JWT e upload real de imagens.</p>
+            <div style="background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);border-radius:var(--radius-sm);padding:12px;font-size:.78rem;color:var(--text-secondary);">
+              <strong style="color:var(--primary);">Endpoint base:</strong> <code>POST /api/projects</code><br>
+              <strong style="color:var(--primary);">Auth:</strong> <code>Bearer JWT</code><br>
+              <strong style="color:var(--primary);">Upload:</strong> <code>multipart/form-data</code>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- === PROJECTS PANEL === -->
+      <div class="admin-panel" id="panel-projects">
+        <div class="admin-topbar">
+          <div>
+            <h1>Projetos</h1>
+            <p class="admin-topbar-desc">Gerencie todos os projetos da plataforma.</p>
+          </div>
+          <button class="btn btn-primary" onclick="switchPanel('create')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Novo Projeto
+          </button>
+        </div>
+
+        <div class="admin-table-wrap">
+          <div class="admin-table-header">
+            <span class="admin-table-title">Lista de Projetos</span>
+            <div class="admin-table-controls">
+              <div class="admin-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input type="text" id="project-search" placeholder="Buscar projetos...">
+              </div>
+              <select class="form-select" id="diff-filter-admin" style="padding:7px 12px;width:auto;">
+                <option value="">Todos os níveis</option>
+                <option value="beginner">Iniciante</option>
+                <option value="intermediate">Intermediário</option>
+                <option value="advanced">Avançado</option>
+              </select>
+            </div>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Projeto</th>
+                  <th>Dificuldade</th>
+                  <th>Linguagem</th>
+                  <th>Categoria</th>
+                  <th>Curtidas</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="projects-table-body">
+                <tr><td colspan="6" style="text-align:center;padding:32px;color:var(--text-muted);">Carregando...</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span class="table-info" id="projects-table-info">—</span>
+            <div class="pagination" id="admin-pagination"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- === USERS PANEL === -->
+      <div class="admin-panel" id="panel-users">
+        <div class="admin-topbar">
+          <div>
+            <h1>Usuários</h1>
+            <p class="admin-topbar-desc">Gerencie os estudantes e administradores.</p>
+          </div>
+        </div>
+        <div class="admin-table-wrap">
+          <div class="admin-table-header">
+            <span class="admin-table-title">Lista de Usuários</span>
+            <div class="admin-table-controls">
+              <div class="admin-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input type="text" id="user-search" placeholder="Buscar usuários...">
+              </div>
+            </div>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Usuário</th>
+                  <th>E-mail</th>
+                  <th>Função</th>
+                  <th>Status</th>
+                  <th>Projetos</th>
+                  <th>Membro Desde</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="users-table-body">
+                <tr><td colspan="7" style="text-align:center;padding:32px;color:var(--text-muted);">Carregando...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- === CREATE/EDIT PROJECT PANEL === -->
+      <div class="admin-panel" id="panel-create">
+        <div class="admin-topbar">
+          <div>
+            <h1 id="form-panel-title">Novo Projeto</h1>
+            <p class="admin-topbar-desc">Preencha os detalhes do projeto abaixo.</p>
+          </div>
+          <button class="btn btn-ghost" onclick="switchPanel('projects')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><polyline points="15 18 9 12 15 6"/></svg>
+            Voltar
+          </button>
+        </div>
+
+        <form id="project-form">
+          <input type="hidden" id="edit-project-id">
+          <div style="display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start;">
+
+            <!-- Left column -->
+            <div style="display:flex;flex-direction:column;gap:20px;">
+              <div class="form-card">
+                <div class="form-card-title">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
+                  Informações Básicas
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Título do Projeto *</label>
+                  <input class="form-input" type="text" id="proj-title" placeholder="Ex: App de Tarefas com Local Storage" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Descrição *</label>
+                  <textarea class="form-textarea" id="proj-desc" placeholder="Descreva o projeto em 1-2 frases..." rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">O Que o Estudante Vai Construir</label>
+                  <textarea class="form-textarea" id="proj-build" placeholder="Detalhe o produto final..." rows="2"></textarea>
+                </div>
+                <div class="form-row">
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label class="form-label">Ícone (emoji)</label>
+                    <input class="form-input" type="text" id="proj-icon" placeholder="📝" maxlength="4">
+                  </div>
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label class="form-label">Tempo Estimado</label>
+                    <input class="form-input" type="text" id="proj-time" placeholder="Ex: 3-4 horas">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-card">
+                <div class="form-card-title">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  Classificação
+                </div>
+                <div class="form-row">
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label class="form-label">Dificuldade *</label>
+                    <select class="form-select" id="proj-difficulty" required>
+                      <option value="">Selecionar...</option>
+                      <option value="beginner">🟢 Iniciante</option>
+                      <option value="intermediate">🟡 Intermediário</option>
+                      <option value="advanced">🔴 Avançado</option>
+                    </select>
+                  </div>
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label class="form-label">Linguagem *</label>
+                    <select class="form-select" id="proj-language" required>
+                      <option value="">Selecionar...</option>
+                      <option value="python">Python</option>
+                      <option value="javascript">JavaScript</option>
+                      <option value="java">Java</option>
+                      <option value="cpp">C++</option>
+                      <option value="typescript">TypeScript</option>
+                      <option value="rust">Rust</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row" style="margin-top:16px;">
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label class="form-label">Categoria *</label>
+                    <select class="form-select" id="proj-category" required>
+                      <option value="">Selecionar...</option>
+                      <option value="web">🌐 Apps Web</option>
+                      <option value="games">🎮 Jogos</option>
+                      <option value="algorithms">⚡ Algoritmos</option>
+                      <option value="data-structures">🏗️ Estruturas de Dados</option>
+                      <option value="ai-ml">🤖 IA & ML</option>
+                      <option value="cli">💻 Ferramentas CLI</option>
+                    </select>
+                  </div>
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label class="form-label">Pré-requisitos</label>
+                    <input class="form-input" type="text" id="proj-prereqs" placeholder="Ex: HTML, CSS básico">
+                  </div>
+                </div>
+                <div class="form-group" style="margin-top:16px;">
+                  <label class="form-label">Tags <span class="form-hint">(Enter para adicionar)</span></label>
+                  <div class="tags-input-wrap" id="tags-wrap">
+                    <input type="text" class="tags-input-field" id="tags-input" placeholder="Ex: HTML, React...">
+                  </div>
+                  <input type="hidden" id="proj-tags">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Conceitos-Chave <span class="form-hint">(Enter para adicionar)</span></label>
+                  <div class="tags-input-wrap" id="concepts-wrap">
+                    <input type="text" class="tags-input-field" id="concepts-input" placeholder="Ex: Manipulação do DOM...">
+                  </div>
+                  <input type="hidden" id="proj-concepts">
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="check-option" style="border:none;padding:0;">
+                    <input type="checkbox" id="proj-featured">
+                    <span>Destaque na página inicial</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right column -->
+            <div style="display:flex;flex-direction:column;gap:20px;">
+              <!-- Image upload -->
+              <div class="form-card">
+                <div class="form-card-title">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  Imagem de Capa
+                </div>
+                <div class="image-upload-field" id="image-drop-zone">
+                  <div class="image-upload-icon">🖼️</div>
+                  <p class="image-upload-text"><strong>Clique ou arraste</strong> uma imagem</p>
+                  <p class="image-upload-hint">PNG, JPG ou GIF · max 5MB</p>
+                  <input type="file" id="cover-upload" accept="image/*" style="display:none;">
+                </div>
+                <img id="cover-preview" class="image-preview" alt="Preview da capa">
+                <div id="cover-info" style="display:none;margin-top:8px;font-size:.78rem;color:var(--text-muted);"></div>
+              </div>
+
+              <!-- Actions -->
+              <div class="form-card">
+                <button type="submit" class="btn btn-primary btn-block" id="submit-project-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                  <span id="submit-label">Publicar Projeto</span>
+                </button>
+                <button type="button" class="btn btn-ghost btn-block" style="margin-top:10px;" onclick="switchPanel('projects')">Cancelar</button>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- DELETE CONFIRM MODAL -->
+<div class="modal-backdrop" id="delete-modal">
+  <div class="modal modal-sm">
+    <div class="modal-header">
+      <h3>Confirmar Exclusão</h3>
+      <button class="modal-close-btn" onclick="closeDeleteModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <p>Tem certeza que deseja excluir o projeto <strong id="delete-project-name"></strong>? Esta ação não pode ser desfeita.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeDeleteModal()">Cancelar</button>
+      <button class="btn btn-danger" id="confirm-delete-btn">Excluir</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/core.js"></script>
+<script src="../js/admin.js"></script>
+</body>
+</html>

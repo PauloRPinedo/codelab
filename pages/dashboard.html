@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Painel do estudante — Acompanhe seu progresso no CodeLab Explorer.">
+  <title>Meu Painel — CodeLab Explorer</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+</head>
+<body>
+
+<div id="toast-container" class="toast-container"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="nav-logo">
+      <svg class="logo-icon" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="url(#lgdb)"/><path d="M12 14L18 20L12 26" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="20" y1="26" x2="28" y2="26" stroke="white" stroke-width="2.5" stroke-linecap="round"/><defs><linearGradient id="lgdb" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#7c3aed"/><stop offset="1" stop-color="#2563eb"/></linearGradient></defs></svg>
+      <span>CodeLab <strong>Explorer</strong></span>
+    </a>
+    <div style="flex:1;"></div>
+    <ul class="nav-links">
+      <li><a href="../index.html" class="nav-link" data-page="index.html">Início</a></li>
+      <li><a href="projects.html" class="nav-link" data-page="projects.html">Projetos</a></li>
+      <li><a href="dashboard.html" class="nav-link active">Painel</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <div class="user-menu" id="user-menu" style="display:none">
+        <button class="user-avatar-btn" id="user-menu-btn">
+          <div class="avatar-circle-sm" id="user-initials-nav">--</div>
+          <span id="user-name-nav"></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;opacity:.6"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="user-dropdown" id="user-dropdown">
+          <div class="user-dropdown-header"><p id="dropdown-name">--</p><span id="dropdown-email">--</span></div>
+          <a href="profile.html" class="user-dropdown-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Perfil</a>
+          <a href="admin.html" class="user-dropdown-item" id="admin-link" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Admin</a>
+          <div class="user-dropdown-divider"></div>
+          <div class="user-dropdown-item danger" id="nav-logout-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sair</div>
+        </div>
+      </div>
+      <a href="login.html" class="btn btn-primary btn-sm" id="nav-login-btn">Entrar</a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <ul class="mobile-nav-links">
+    <li><a href="../index.html" class="mobile-link">Início</a></li>
+    <li><a href="projects.html" class="mobile-link">Projetos</a></li>
+    <li><a href="profile.html" class="mobile-link">Perfil</a></li>
+  </ul>
+</div>
+
+<!-- DASHBOARD CONTENT -->
+<main class="dashboard-page">
+  <div class="container">
+    <div class="dashboard-grid">
+
+      <!-- Sidebar esquerda -->
+      <aside class="dash-sidebar">
+        <div class="dash-profile">
+          <div class="dash-avatar-circle" id="dash-avatar">--</div>
+          <h3 id="dash-name">Carregando...</h3>
+          <p id="dash-role-label">Estudante</p>
+        </div>
+        <nav class="dash-nav">
+          <div class="dash-nav-item active" data-section="overview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Visão Geral
+          </div>
+          <div class="dash-nav-item" data-section="progress">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            Meu Progresso
+          </div>
+          <div class="dash-nav-item" data-section="saved">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            Projetos Salvos
+          </div>
+          <div class="dash-nav-item" data-section="recommended">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Recomendados
+          </div>
+          <a href="profile.html" class="dash-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Meu Perfil
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Conteúdo principal -->
+      <div class="dash-main">
+
+        <!-- Boas-vindas -->
+        <div class="dash-welcome">
+          <h2>Olá, <span id="welcome-name">estudante</span>! 👋</h2>
+          <p>Continue de onde parou. Você está indo muito bem!</p>
+        </div>
+
+        <!-- Seção: Visão Geral -->
+        <div class="dash-section" id="section-overview">
+          <!-- Cards de progresso -->
+          <div class="progress-cards">
+            <div class="progress-card fade-up">
+              <div class="circular-progress">
+                <svg viewBox="0 0 80 80">
+                  <circle class="cp-bg" cx="40" cy="40" r="33"/>
+                  <circle class="cp-fill" cx="40" cy="40" r="33" style="--pct:68"/>
+                </svg>
+                <span class="cp-value">68%</span>
+              </div>
+              <h4>Progresso Geral</h4>
+              <p>12 de 18 módulos</p>
+            </div>
+            <div class="progress-card fade-up delay-1">
+              <div class="circular-progress">
+                <svg viewBox="0 0 80 80">
+                  <circle class="cp-bg" cx="40" cy="40" r="33"/>
+                  <circle class="cp-fill" cx="40" cy="40" r="33" style="--pct:85"/>
+                </svg>
+                <span class="cp-value">85%</span>
+              </div>
+              <h4>Python</h4>
+              <p>17 de 20 projetos</p>
+            </div>
+            <div class="progress-card fade-up delay-2">
+              <div class="circular-progress">
+                <svg viewBox="0 0 80 80">
+                  <circle class="cp-bg" cx="40" cy="40" r="33"/>
+                  <circle class="cp-fill" cx="40" cy="40" r="33" style="--pct:42"/>
+                </svg>
+                <span class="cp-value">42%</span>
+              </div>
+              <h4>JavaScript</h4>
+              <p>8 de 19 projetos</p>
+            </div>
+          </div>
+
+          <div class="dash-row">
+            <!-- Trilha de aprendizado -->
+            <div class="dash-card">
+              <h3 class="dash-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                Trilha de Aprendizado
+              </h3>
+              <div class="skill-tree">
+                <div class="skill-node completed">
+                  <div class="skill-icon">✅</div>
+                  <div class="skill-info"><h5>Fundamentos</h5><p>Variáveis, loops, funções</p></div>
+                </div>
+                <div class="skill-connector done"></div>
+                <div class="skill-node completed">
+                  <div class="skill-icon">✅</div>
+                  <div class="skill-info"><h5>Estruturas de Dados</h5><p>Arrays, listas, pilhas, filas</p></div>
+                </div>
+                <div class="skill-connector done"></div>
+                <div class="skill-node active">
+                  <div class="skill-icon">🔄</div>
+                  <div class="skill-info"><h5>Algoritmos</h5><p>Ordenação, busca, grafos</p></div>
+                </div>
+                <div class="skill-connector"></div>
+                <div class="skill-node locked">
+                  <div class="skill-icon">🔒</div>
+                  <div class="skill-info"><h5>Tópicos Avançados</h5><p>Programação dinâmica, árvores</p></div>
+                </div>
+                <div class="skill-connector"></div>
+                <div class="skill-node locked">
+                  <div class="skill-icon">🔒</div>
+                  <div class="skill-info"><h5>Design de Sistemas</h5><p>Arquitetura, escalabilidade</p></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Atividade recente -->
+            <div class="dash-card">
+              <h3 class="dash-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Atividade Recente
+              </h3>
+              <div class="activity-timeline">
+                <div class="activity-item">
+                  <div class="activity-dot dot-green"></div>
+                  <div class="activity-content">
+                    <p><strong>Salvou</strong> Visualizador de Algoritmos</p>
+                    <span class="activity-time">2 horas atrás</span>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-dot dot-blue"></div>
+                  <div class="activity-content">
+                    <p><strong>Iniciou</strong> API REST com Spring Boot</p>
+                    <span class="activity-time">5 horas atrás</span>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-dot dot-purple"></div>
+                  <div class="activity-content">
+                    <p><strong>Ganhou distintivo</strong> "Explorador" 🏆</p>
+                    <span class="activity-time">Ontem</span>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-dot dot-green"></div>
+                  <div class="activity-content">
+                    <p><strong>Concluiu</strong> App de Tarefas</p>
+                    <span class="activity-time">2 dias atrás</span>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-dot dot-amber"></div>
+                  <div class="activity-content">
+                    <p><strong>Curtiu</strong> Rede Neural do Zero</p>
+                    <span class="activity-time">3 dias atrás</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recomendados pelos professores -->
+          <div class="dash-card" style="margin-top:0;">
+            <h3 class="dash-card-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              Recomendados pelo Professor
+            </h3>
+            <div id="recommended-list">Carregando...</div>
+          </div>
+
+          <!-- Projetos salvos -->
+          <div class="dash-card" style="margin-top:24px;">
+
+            <h3 class="dash-card-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+              Meus Projetos Salvos
+            </h3>
+            <div class="saved-grid-dash" id="saved-grid">Carregando...</div>
+          </div>
+        </div>
+
+      </div><!-- /dash-main -->
+    </div><!-- /dashboard-grid -->
+  </div>
+</main>
+
+<script src="../js/api.js"></script>
+<script src="../js/core.js"></script>
+<script src="../js/dashboard.js"></script>
+</body>
+</html>
